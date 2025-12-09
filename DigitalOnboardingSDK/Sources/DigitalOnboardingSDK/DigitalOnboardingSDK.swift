@@ -1,2 +1,11 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+public final class DivSDK {
+    
+    private let serviceProvider: ServicesProtocol
+    private let uiConfig: UIConfig
+    
+    init(serviceProvider: ServicesProtocol, uiConfig: UIConfig) {
+        self.serviceProvider = serviceProvider
+        self.uiConfig = uiConfig
+    }
+    
+}

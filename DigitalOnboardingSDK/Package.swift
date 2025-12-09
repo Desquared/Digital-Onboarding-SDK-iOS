@@ -20,8 +20,7 @@ let package = Package(
         .target(
             name: "DigitalOnboardingSDK"),
         .testTarget(
-            name: "DigitalOnboardingSDKTests",
-            dependencies: ["DigitalOnboardingSDK"]
-        )
+                    name: "DigitalOnboardingSDKTests",
+                    dependencies: ["DigitalOnboardingSDK"])
     ]
 )

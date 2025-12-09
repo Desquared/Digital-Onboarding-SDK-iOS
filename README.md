@@ -16,3 +16,9 @@ SDK provides identity verification and e-sign document flows for iOS apps. It in
 - Pluggable ServiceProvider for network stack
 - Dynamic UI configuration per host product
 - Observability headers and correlation IDs throughout requests
+
+## Requirements
+
+- iOS 16.0+
+- Xcode 15+
+- Swift 5.9+

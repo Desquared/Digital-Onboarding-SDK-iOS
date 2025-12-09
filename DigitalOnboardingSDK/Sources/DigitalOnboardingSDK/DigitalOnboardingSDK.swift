@@ -1,10 +1,10 @@
 public final class DivSDK {
     
-    private let serviceProvider: ServicesProtocol
+    private let servicesProvider: ServicesProvider
     private let uiConfig: UIConfig
     
-    init(serviceProvider: ServicesProtocol, uiConfig: UIConfig) {
-        self.serviceProvider = serviceProvider
+    init(servicesProvider: ServicesProvider, uiConfig: UIConfig) {
+        self.servicesProvider = servicesProvider
         self.uiConfig = uiConfig
     }
     

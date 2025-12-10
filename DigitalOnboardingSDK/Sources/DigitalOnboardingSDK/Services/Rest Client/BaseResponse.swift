@@ -8,9 +8,9 @@
 import Foundation
 
 public struct BaseResponse {
-    public let statusCode: Int
-    public let data: Data?
-    public let error: Error?
+    private let statusCode: Int
+    private let data: Data?
+    private let error: Error?
     
     public init(statusCode: Int, data: Data?, error: Error?) {
         self.statusCode = statusCode

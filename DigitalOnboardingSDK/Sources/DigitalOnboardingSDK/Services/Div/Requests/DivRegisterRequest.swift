@@ -7,24 +7,43 @@
 
 import Foundation
 
-public struct DivRegisterRequest: Codable, BaseRequest {
-    public let channel: String
-    public let orderId: String
-    public let flow: String
-    public let darkMode: Bool
-    public let redirectUrl: String
-    public let fallbackUrl: String?
-    public let lang: String
-    public let title: String
-    public let guid: String?
-    public let attributes: [Attribute]
-    public let steps: [Step]
-    public let metadata: [Metadata]
+public struct DivRegisterRequest: Encodable, BaseRequest {
+    private let channel: String
+    private let orderId: String
+    private let flow: String
+    private let darkMode: Bool
+    private let redirectUrl: String
+    private let fallbackUrl: String?
+    private let lang: String
+    private let title: String
+    private let guid: String?
+    private let attributes: [Attribute]
+    private let steps: [Step]
+    private let metadata: [Metadata]
 
     public let xRequestTrackingId: String?
     public let uuid: String?
 
-    public init(channel: String, orderId: String, flow: String, darkMode: Bool, redirectUrl: String, fallbackUrl: String?, lang: String, title: String, guid: String?, attributes: [Attribute], steps: [Step], metadata: [Metadata], xRequestTrackingId: String?, uuid: String?) {
+    private enum CodingKeys: String, CodingKey {
+        case channel, orderId, flow, darkMode, redirectUrl, fallbackUrl, lang, title, guid, attributes, steps, metadata
+    }
+
+    public init(
+        channel: String,
+        orderId: String,
+        flow: String,
+        darkMode: Bool,
+        redirectUrl: String,
+        fallbackUrl: String?,
+        lang: String,
+        title: String,
+        guid: String?,
+        attributes: [Attribute],
+        steps: [Step],
+        metadata: [Metadata],
+        xRequestTrackingId: String?,
+        uuid: String?
+    ) {
         self.channel = channel
         self.orderId = orderId
         self.flow = flow

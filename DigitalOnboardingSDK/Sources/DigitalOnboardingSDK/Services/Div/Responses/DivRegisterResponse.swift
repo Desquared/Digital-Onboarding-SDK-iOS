@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct DivRegisterResponse: Codable {
-    public let redirectUrl: String
-    public let uuid: String
+public struct DivRegisterResponse: Decodable {
+    private let redirectUrl: String
+    private let UUID: String
     
-    public init(redirectUrl: String, uuid: String) {
+    public init(redirectUrl: String, UUID: String) {
         self.redirectUrl = redirectUrl
-        self.uuid = uuid
+        self.UUID = UUID
     }
 }

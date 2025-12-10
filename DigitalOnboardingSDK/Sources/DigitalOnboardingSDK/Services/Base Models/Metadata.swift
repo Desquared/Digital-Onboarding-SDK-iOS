@@ -6,8 +6,8 @@
 //
 
 public struct Metadata: Codable {
-    public let name: String
-    public let value: String
+    private let name: String
+    private let value: String
 
     public init(name: String, value: String) {
         self.name = name

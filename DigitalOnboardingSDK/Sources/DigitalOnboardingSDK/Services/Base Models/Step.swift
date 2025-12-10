@@ -6,9 +6,9 @@
 //
 
 public struct Step: Codable {
-    public let title: String
-    public let active: Bool
-    public let order: Int
+    private let title: String
+    private let active: Bool
+    private let order: Int
 
     public init(title: String, active: Bool, order: Int) {
         self.title = title

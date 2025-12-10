@@ -1,4 +1,4 @@
-public final class DivSDK {
+public final class DigitalOnboardingSDK {
     
     private let servicesProvider: ServicesProvider
     private let uiConfig: UIConfig

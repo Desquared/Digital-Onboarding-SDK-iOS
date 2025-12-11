@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Wrapper to make any Encodable work with JSONEncoder
 private struct AnyEncodable: Encodable {
     let value: Encodable
     
@@ -32,28 +31,86 @@ public class RestApiClient {
         self.configuration = configuration
     }
     
+    /// Sends an HTTP request and decodes the response into the specified type.
+    /// Automatically handles request logging, response validation, and error logging.
+    /// - Parameter request: The request to send, containing method, endpoint, query parameters, and body.
+    /// - Returns: The decoded response of type T.
+    /// - Throws: NetworkError if the request fails, response is invalid, or decoding fails.
     public func send<T: Decodable>(_ request: Request<T>) async throws -> T {
         try await send(request) { data in try self.decode(data) }
     }
-        
+    
+    /// Sends an HTTP request that expects no response body (Void).
+    /// Automatically handles request logging, response validation, and error logging.
+    /// - Parameter request: The request to send, containing method, endpoint, query parameters, and body.
+    /// - Throws: NetworkError if the request fails or response is invalid.
     public func send(_ request: Request<Void>) async throws {
         try await send(request) { _ in () }
     }
 
+    /// Core send method that handles the complete request lifecycle.
+    /// Generates a unique request ID, logs the request, sends it, validates the response,
+    /// logs the response or error, and decodes the result.
+    /// - Parameters:
+    ///   - request: The request to send.
+    ///   - decode: A closure that decodes the response data into the expected type.
+    /// - Returns: The decoded response of type T.
+    /// - Throws: NetworkError if any step of the request fails.
     private func send<T>(_ request: Request<T>,
                          _ decode: @escaping (Data) throws -> T) async throws -> T
     {
+        let requestId = request.endpoint + "-" + (request.baseRequest?.xRequestTrackingId ?? "")
+        let startTime = Date()
         let urlRequest = try await makeURLRequest(for: request)
-        let (data, response) = try await send(urlRequest)
-        try validate(response: response, data: data)
-        return try decode(data)
+        logRequest(
+            logger: configuration.logger,
+            request: urlRequest,
+            startTime: startTime,
+            requestId: requestId,
+            endpoint: request.endpoint
+        )
+        
+        do {
+            let (data, response) = try await send(urlRequest)
+            try validate(response: response, data: data)
+            
+            logResponse(
+                logger: configuration.logger,
+                response: response,
+                requestId: requestId,
+                data: data,
+                startTime: startTime
+            )
+            
+            return try decode(data)
+        } catch {
+            // Log error
+            logError(
+                logger: configuration.logger,
+                requestId: requestId,
+                error: error,
+                startTime: startTime
+            )
+            throw error
+        }
     }
 
-    // The final implementation uses a custom URLSession wrapper compatible with iOS 13.0
+    /// Executes the URLRequest using URLSession.
+    /// This is a thin wrapper around URLSession.data that allows for easy testing and mocking.
+    /// - Parameter request: The URLRequest to execute.
+    /// - Returns: A tuple containing the response data and URLResponse.
+    /// - Throws: URLError if the network request fails.
     private func send(_ request: URLRequest) async throws -> (Data, URLResponse) {
         try await session.data(for: request, delegate: nil)
     }
     
+    /// Constructs a URLRequest from the generic Request object.
+    /// Combines base URL with endpoint, adds query parameters, sets HTTP method,
+    /// applies default headers, sets BaseRequest headers (X-Request-Tracking-Id, UUID),
+    /// and encodes the request body as JSON.
+    /// - Parameter request: The generic request object containing all request details.
+    /// - Returns: A fully configured URLRequest ready to be sent.
+    /// - Throws: NetworkError.invalidURL if the URL cannot be constructed.
     private func makeURLRequest<T>(for request: Request<T>) async throws -> URLRequest {
         guard let baseURL = baseURL else {
             throw NetworkError.invalidURL
@@ -71,12 +128,10 @@ public class RestApiClient {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
         
-        // Set default headers
         for (key, value) in headers {
             urlRequest.setValue(value, forHTTPHeaderField: key)
         }
         
-        // Set headers from baseRequest
         if let baseRequest = request.baseRequest {
             if let trackingId = baseRequest.xRequestTrackingId {
                 urlRequest.setValue(trackingId, forHTTPHeaderField: "X-Request-Tracking-Id")
@@ -86,7 +141,6 @@ public class RestApiClient {
             }
         }
         
-        // Set body
         if let body = request.body {
             urlRequest.httpBody = try encoder.encode(AnyEncodable(value: body))
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
@@ -101,6 +155,14 @@ public class RestApiClient {
         return urlRequest
     }
     
+    /// Validates the HTTP response status code and throws appropriate errors.
+    /// - Parameters:
+    ///   - response: The URLResponse to validate.
+    ///   - data: The response data, used for error message extraction.
+    /// - Throws: NetworkError.invalidResponse if response is not HTTPURLResponse,
+    ///           NetworkError.clientError for 4xx status codes,
+    ///           NetworkError.serverError for 5xx status codes,
+    ///           NetworkError.unknownError for unexpected status codes.
     private func validate(response: URLResponse, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidResponse
@@ -118,12 +180,19 @@ public class RestApiClient {
         }
     }
     
+    /// Decodes JSON data into the specified Decodable type.
+    /// - Parameter data: The JSON data to decode.
+    /// - Returns: The decoded object of type T.
+    /// - Throws: DecodingError if the data cannot be decoded into type T.
     private func decode<T: Decodable>(_ data: Data) throws -> T {
         try decoder.decode(T.self, from: data)
     }
 }
 
 extension RestApiClient {
+    /// Creates and configures a URLSession with the settings from the configuration model.
+    /// Sets up timeout intervals, connectivity options, TLS security, and caching policies.
+    /// - Returns: A configured URLSession instance ready for network requests.
     func createSession() -> URLSession {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = configuration.timeout

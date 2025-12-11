@@ -122,4 +122,14 @@ class DefaultDivServicesProvider: DivServicesProvider {
         )
         return try await client.send(request)
     }
+    
+    func performResult(uuid: String) async throws -> DivResultResponse {
+        let request = Request<DivResultResponse>(
+            method: .GET,
+            endpoint: "/v1/result",
+            body: nil,
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+        return try await client.send(request)
+    }
 }

@@ -83,4 +83,10 @@ public protocol DivServicesProvider {
     /// - Parameters:
     /// - uuid: The UUID obtained from the registration step.
     func performDocumentStepRetrieve(uuid: String) async throws -> DivVerifyDocumentResponse
+    
+    /// Retrieve overall DIV flow result and optional artifacts/metadata.
+    /// Call after completion events to finalize flow and collect outputs.
+    /// - Parameters:
+    /// - uuid: The UUID obtained from the registration step.
+    func performResult(uuid: String) async throws -> DivResultResponse
 }

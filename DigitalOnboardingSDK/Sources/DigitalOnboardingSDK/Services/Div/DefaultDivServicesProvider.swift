@@ -81,4 +81,15 @@ class DefaultDivServicesProvider: DivServicesProvider {
         
         return try await client.send(request)
     }
+    
+    func performValidate(uuid: String) async throws -> DivValidateResponse {
+        let request = Request<DivValidateResponse>(
+            method: .GET,
+            endpoint: "/validate",
+            body: nil,
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+        
+        return try await client.send(request)
+    }
 }

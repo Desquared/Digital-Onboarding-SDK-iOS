@@ -1,4 +1,3 @@
-// filepath: /Users/magoulas/Documents/Development/iOS/DIV SDK/DigitalOnboardingSDK/Sources/DigitalOnboardingSDK/Services/Rest Client/BaseRequest.swift
 //
 //  BaseRequest.swift
 //  DigitalOnboardingSDK
@@ -19,12 +18,25 @@ public struct Request<Response> {
     public let query: [String: String]?
     public let body: Encodable?
     public let baseRequest: BaseRequest?
-    
+
     public init(method: HTTPMethod, endpoint: String, query: [String: String]? = nil, body: Encodable? = nil, baseRequest: BaseRequest? = nil) {
         self.method = method
         self.endpoint = endpoint
         self.query = query
         self.body = body
         self.baseRequest = baseRequest
+    }
+}
+
+public class BaseRequestImpl: BaseRequest {
+    public let xRequestTrackingId: String?
+    public let uuid: String?
+
+    public init(
+        xRequestTrackingId: String? = UUID().uuidString,
+        uuid: String? = nil
+    ) {
+        self.xRequestTrackingId = xRequestTrackingId
+        self.uuid = uuid
     }
 }

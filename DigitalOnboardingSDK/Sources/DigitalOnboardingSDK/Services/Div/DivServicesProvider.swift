@@ -6,6 +6,23 @@
 //
 
 public protocol DivServicesProvider {
+    
+    /// Initialize DIV registration and obtain redirect URL and UUID.
+    /// Used to kick off the identity flow in the SDK.
+    /// Track and persist UUID for subsequent calls.
+    /// - Parameters:
+    ///  - channel: The channel through which the registration is performed.
+    ///  - orderId: The order identifier.
+    ///  - flow: The flow type for the registration.
+    ///  - darkMode: A boolean indicating if dark mode is enabled.
+    ///  - redirectUrl: The URL to redirect to after registration.
+    ///  - fallbackUrl: An optional fallback URL in case of failure.
+    ///  - lang: The language code for the registration process.
+    ///  - title: The title for the registration page.
+    ///  - guid: An optional globally unique identifier for the user from CosmoteID.
+    ///  - attributes: A list of attributes to be included in the registration.
+    ///  - steps: A list of steps involved in the registration process.
+    ///  - metadata: A list of metadata items associated with the user.
     func performRegister(
         channel: String,
         orderId: String,
@@ -21,6 +38,17 @@ public protocol DivServicesProvider {
         metadata: [Metadata]
     ) async throws -> DivRegisterResponse
 
+    /// Upload a document to DIV for processing.
+    /// Minimal variant may include only step: "waiting".
+    /// Use after Register and before Verify Document.
+    /// - Parameters:
+    /// - uuid: The UUID obtained from the registration step.
+    /// - encodedDocument: The base64 encoded document to be uploaded.
+    /// - entityType: The type of entity
+    /// - mimeType: The MIME type of the document.
+    /// - docId: The document identifier.
+    /// - documentType: The type of document being uploaded.
+    /// - errorCodes: An optional list of error codes associated with the document.
     func performStoreDocument(
         uuid: String,
         encodedDocument: String,
@@ -30,4 +58,10 @@ public protocol DivServicesProvider {
         documentType: DocumentType,
         errorCodes: [String]?
     ) async throws -> DivStoreResponse
+    
+    /// Fetches current flow steps and titles for client UI.
+    /// Use to render progress UI and enable/disable actions by step.
+    /// - Parameters:
+    /// - uuid: The UUID obtained from the registration step.
+    func performValidate(uuid: String) async throws -> DivValidateResponse
 }

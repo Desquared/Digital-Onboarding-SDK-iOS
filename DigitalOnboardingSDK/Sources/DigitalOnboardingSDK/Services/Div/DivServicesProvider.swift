@@ -77,4 +77,10 @@ public protocol DivServicesProvider {
     ///  - Parameters:
     ///  - uuid: The UUID obtained from the registration step.
     func performStepReset(uuid: String) async throws -> DivVerifyDocumentResponse
+    
+    /// Retrieve the current document capture step from DIV.
+    /// Use to drive capture UI and error surfaces.
+    /// - Parameters:
+    /// - uuid: The UUID obtained from the registration step.
+    func performDocumentStepRetrieve(uuid: String) async throws -> DivVerifyDocumentResponse
 }

@@ -92,4 +92,14 @@ class DefaultDivServicesProvider: DivServicesProvider {
         
         return try await client.send(request)
     }
+    
+    func performVerifyDocument(uuid: String) async throws -> DivVerifyDocumentResponse {
+        let request = Request<DivVerifyDocumentResponse>(
+            method: .GET,
+            endpoint: "/verifyDocument",
+            body: nil,
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+        return try await client.send(request)
+    }
 }

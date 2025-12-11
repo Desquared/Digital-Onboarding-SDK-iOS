@@ -64,4 +64,11 @@ public protocol DivServicesProvider {
     /// - Parameters:
     /// - uuid: The UUID obtained from the registration step.
     func performValidate(uuid: String) async throws -> DivValidateResponse
+    
+    /// Checks verification status of uploaded documents.
+    /// Needs time for verification. Possible polling or websocket
+    /// Handle partial errors per document (e.g., back side failed).
+    /// - Parameters:
+    /// - uuid: The UUID obtained from the registration step.
+    func performVerifyDocument(uuid: String) async throws -> DivVerifyDocumentResponse
 }

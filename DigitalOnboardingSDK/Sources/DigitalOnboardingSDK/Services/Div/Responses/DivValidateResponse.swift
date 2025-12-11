@@ -9,8 +9,8 @@ import Foundation
 
 public struct DivValidateResponse: Decodable {
     
-    private let steps: [Step]?
-    private let title: String?
+    let steps: [Step]?
+    let title: String?
     
     private enum CodingKeys: String, CodingKey {
         case steps, title

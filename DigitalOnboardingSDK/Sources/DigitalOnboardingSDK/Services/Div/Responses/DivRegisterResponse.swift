@@ -8,11 +8,16 @@
 import Foundation
 
 public struct DivRegisterResponse: Decodable {
-    private let redirectUrl: String
-    private let UUID: String
+    public let redirectUrl: String
+    public let uuid: String
     
-    public init(redirectUrl: String, UUID: String) {
+    private enum CodingKeys: String, CodingKey {
+        case redirectUrl
+        case uuid = "UUID"
+    }
+    
+    public init(redirectUrl: String, uuid: String) {
         self.redirectUrl = redirectUrl
-        self.UUID = UUID
+        self.uuid = uuid
     }
 }

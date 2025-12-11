@@ -42,7 +42,7 @@ public struct DivRegisterRequest: Encodable, BaseRequest {
         steps: [Step],
         metadata: [Metadata],
         xRequestTrackingId: String?,
-        uuid: String?
+        uuid: String? = nil
     ) {
         self.channel = channel
         self.orderId = orderId

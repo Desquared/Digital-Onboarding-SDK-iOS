@@ -28,7 +28,7 @@ class DefaultESignProvider: ESignServicesProvider {
         steps: [Step],
         metadata: [Metadata]
     ) async throws -> ESignRegisterResponse {
-        let requestBody = DivRegisterRequest(
+        let requestBody = RegisterRequest(
             channel: channel,
             orderId: orderId,
             flow: flow,
@@ -48,6 +48,17 @@ class DefaultESignProvider: ESignServicesProvider {
             endpoint: "/esign/register",
             body: requestBody,
             baseRequest: requestBody
+        )
+        
+        return try await client.send(request)
+    }
+    
+    func performValidate(uuid: String) async throws -> ValidateResponse {
+        let request = Request<ValidateResponse>(
+            method: .GET,
+            endpoint: "/esign/validate",
+            body: nil,
+            baseRequest: BaseRequestImpl(uuid: uuid)
         )
         
         return try await client.send(request)

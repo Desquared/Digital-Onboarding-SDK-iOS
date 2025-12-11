@@ -1,5 +1,5 @@
 //
-//  DivRegisterRequest.swift
+//  RegisterRequest.swift
 //  DigitalOnboardingSDK
 //
 //  Created by Christos Magoulas on 10/12/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DivRegisterRequest: Encodable, BaseRequest {
+public struct RegisterRequest: Encodable, BaseRequest {
     private let channel: String
     private let orderId: String
     private let flow: String

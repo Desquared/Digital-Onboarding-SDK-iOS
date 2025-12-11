@@ -28,7 +28,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         steps: [Step],
         metadata: [Metadata]
     ) async throws -> DivRegisterResponse {
-        let requestBody = DivRegisterRequest(
+        let requestBody = RegisterRequest(
             channel: channel,
             orderId: orderId,
             flow: flow,
@@ -82,8 +82,8 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performValidate(uuid: String) async throws -> DivValidateResponse {
-        let request = Request<DivValidateResponse>(
+    func performValidate(uuid: String) async throws -> ValidateResponse {
+        let request = Request<ValidateResponse>(
             method: .GET,
             endpoint: "/validate",
             body: nil,

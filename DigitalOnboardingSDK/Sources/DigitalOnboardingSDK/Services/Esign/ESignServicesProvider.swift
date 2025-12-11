@@ -37,5 +37,11 @@ public protocol ESignServicesProvider {
         metadata: [Metadata]
     ) async throws -> ESignRegisterResponse
     
+    /// Fetches current flow steps and titles for client UI.
+    /// Use to render progress UI and enable/disable actions by step.
+    /// - Parameters:
+    /// - uuid: The UUID obtained from the registration step.
+    func performValidate(uuid: String) async throws -> ValidateResponse
+    
 }
 

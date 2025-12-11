@@ -6,7 +6,7 @@
 //
 
 public protocol DivServicesProvider {
-     func performRegister(
+    func performRegister(
         channel: String,
         orderId: String,
         flow: String,
@@ -18,7 +18,16 @@ public protocol DivServicesProvider {
         guid: String?,
         attributes: [Attribute],
         steps: [Step],
-        metadata: [Metadata],
-        xRequestTrackingId: String?
+        metadata: [Metadata]
     ) async throws -> DivRegisterResponse
+
+    func performStoreDocument(
+        uuid: String,
+        encodedDocument: String,
+        entityType: String,
+        mimeType: MimeType,
+        docId: String,
+        documentType: DocumentType,
+        errorCodes: [String]?
+    ) async throws -> DivStoreResponse
 }

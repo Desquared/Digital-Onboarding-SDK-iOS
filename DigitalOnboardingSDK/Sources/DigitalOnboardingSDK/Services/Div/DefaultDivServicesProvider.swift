@@ -7,14 +7,14 @@
 
 import Foundation
 
-public final class DefaultDivServicesProvider: DivServicesProvider {
+class DefaultDivServicesProvider: DivServicesProvider {
     private let client: RestApiClient
     
-    public init(client: RestApiClient) {
+    init(client: RestApiClient) {
         self.client = client
     }
     
-    public func performRegister(
+    func performRegister(
         channel: String,
         orderId: String,
         flow: String,
@@ -26,8 +26,7 @@ public final class DefaultDivServicesProvider: DivServicesProvider {
         guid: String?,
         attributes: [Attribute],
         steps: [Step],
-        metadata: [Metadata],
-        xRequestTrackingId: String?
+        metadata: [Metadata]
     ) async throws -> DivRegisterResponse {
         let requestBody = DivRegisterRequest(
             channel: channel,
@@ -41,9 +40,7 @@ public final class DefaultDivServicesProvider: DivServicesProvider {
             guid: guid,
             attributes: attributes,
             steps: steps,
-            metadata: metadata,
-            xRequestTrackingId: xRequestTrackingId,
-            uuid: nil
+            metadata: metadata
         )
         
         let request = Request<DivRegisterResponse>(
@@ -54,5 +51,34 @@ public final class DefaultDivServicesProvider: DivServicesProvider {
         )
         
         return try await client.send(request)
-     }
+    }
+    
+    func performStoreDocument(
+        uuid: String,
+        encodedDocument: String,
+        entityType: String,
+        mimeType: MimeType,
+        docId: String,
+        documentType: DocumentType,
+        errorCodes: [String]?
+    ) async throws -> DivStoreResponse {
+        let requestBody = DivStoreDocRequest(
+            uuid: uuid,
+            encodedDoc: encodedDocument,
+            entityType: entityType,
+            mimeType: mimeType,
+            docId: docId,
+            documentType: documentType,
+            errorCodes: errorCodes
+        )
+        
+        let request = Request<DivStoreResponse>(
+            method: .POST,
+            endpoint: "/storeDocument",
+            body: requestBody,
+            baseRequest: requestBody
+        )
+        
+        return try await client.send(request)
+    }
 }

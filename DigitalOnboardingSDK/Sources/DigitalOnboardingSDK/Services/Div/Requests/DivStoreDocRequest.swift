@@ -5,6 +5,8 @@
 //  Created by Christos Magoulas on 10/12/25.
 //
 
+import Foundation
+
 public struct DivStoreDocRequest: Encodable, BaseRequest {
     
     public let xRequestTrackingId: String?
@@ -22,7 +24,7 @@ public struct DivStoreDocRequest: Encodable, BaseRequest {
     }
     
     public init(
-        xRequestTrackingId: String?,
+        xRequestTrackingId: String? = UUID().uuidString,
         uuid: String?,
         encodedDoc: String,
         entityType: String,

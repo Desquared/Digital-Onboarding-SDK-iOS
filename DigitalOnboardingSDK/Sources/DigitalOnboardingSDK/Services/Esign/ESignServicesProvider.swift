@@ -43,5 +43,12 @@ public protocol ESignServicesProvider {
     /// - uuid: The UUID obtained from the registration step.
     func performValidate(uuid: String) async throws -> ValidateResponse
     
+    /// Retrieves a document by its identifier for the given UUID.
+    /// Decode base64 to present or store.
+    /// - Parameters:
+    /// - docId: The document identifier.
+    /// - uuid: The UUID associated with the document.
+    func getDocumentById(docId: String, uuid: String) async throws -> DocumentResponse
+    
 }
 

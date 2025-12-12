@@ -83,4 +83,14 @@ class DefaultESignProvider: ESignServicesProvider {
          
         return try await client.send(request)
     }
+    
+    func performDocumentRetrieve(uuid: String) async throws -> [DocumentResponse] {
+        let request = Request<[DocumentResponse]>(
+            method: .GET,
+            endpoint: "/esign/document/retrieve",
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+        
+        return try await client.send(request)
+    }
 }

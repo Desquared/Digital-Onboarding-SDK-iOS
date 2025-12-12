@@ -56,5 +56,11 @@ public protocol ESignServicesProvider {
     /// - uuid: The UUID associated with the documents.
     func getAllDocuments(uuid: String) async throws -> DocumentResponse
     
+    /// Retrieve list of eSign documents available to the user.
+    /// Use with preview or download endpoints.
+    /// - Parameters:
+    /// - uuid: The UUID associated with the documents.
+    func performDocumentRetrieve(uuid: String) async throws -> [DocumentResponse]
+    
 }
 

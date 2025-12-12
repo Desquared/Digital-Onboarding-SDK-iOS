@@ -50,5 +50,11 @@ public protocol ESignServicesProvider {
     /// - uuid: The UUID associated with the document.
     func getDocumentById(docId: String, uuid: String) async throws -> DocumentResponse
     
+    /// Retrieves all documents associated with the given UUID.
+    /// Backend may return a single compiled bundled PDF
+    /// - Parameters:
+    /// - uuid: The UUID associated with the documents.
+    func getAllDocuments(uuid: String) async throws -> DocumentResponse
+    
 }
 

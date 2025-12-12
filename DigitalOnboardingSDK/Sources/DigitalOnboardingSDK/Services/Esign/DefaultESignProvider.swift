@@ -67,11 +67,20 @@ class DefaultESignProvider: ESignServicesProvider {
     func getDocumentById(docId: String, uuid: String) async throws -> DocumentResponse {
         let request = Request<DocumentResponse>(
             method: .GET,
-            endpoint: "/esign/document/download",
-            query: docId.isEmpty ? nil : ["docId": docId],
+            endpoint: "/esign/document/download/" + docId,
             baseRequest: BaseRequestImpl(uuid: uuid)
         )
         
+        return try await client.send(request)
+    }
+    
+    func getAllDocuments(uuid: String) async throws -> DocumentResponse {
+        let request = Request<DocumentResponse>(
+            method: .GET,
+            endpoint: "/esign/document/download/all",
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+         
         return try await client.send(request)
     }
 }

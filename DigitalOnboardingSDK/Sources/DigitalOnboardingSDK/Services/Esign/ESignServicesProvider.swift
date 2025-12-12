@@ -35,7 +35,7 @@ public protocol ESignServicesProvider {
         attributes: [Attribute],
         steps: [Step],
         metadata: [Metadata]
-    ) async throws -> ESignRegisterResponse
+    ) async throws -> ESignResponse
     
     /// Fetches current flow steps and titles for client UI.
     /// Use to render progress UI and enable/disable actions by step.
@@ -67,6 +67,12 @@ public protocol ESignServicesProvider {
     /// - Parameters:
     /// - uuid: The UUID associated with the consent.
     func acceptConsent(uuid: String) async throws -> Void
+    
+    /// Get overall eSign result and optional redirect URL.
+    /// Use to confirm signature completion and proceed accordingly.
+    /// - Parameters:
+    /// - uuid: The UUID associated with the eSign process.
+    func performResult(uuid: String) async throws -> ESignResponse
     
 }
 

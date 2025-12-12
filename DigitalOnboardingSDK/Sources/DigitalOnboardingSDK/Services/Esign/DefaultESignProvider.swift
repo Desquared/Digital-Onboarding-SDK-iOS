@@ -27,7 +27,7 @@ class DefaultESignProvider: ESignServicesProvider {
         attributes: [Attribute],
         steps: [Step],
         metadata: [Metadata]
-    ) async throws -> ESignRegisterResponse {
+    ) async throws -> ESignResponse {
         let requestBody = RegisterRequest(
             channel: channel,
             orderId: orderId,
@@ -43,7 +43,7 @@ class DefaultESignProvider: ESignServicesProvider {
             metadata: metadata
         )
         
-        let request = Request<ESignRegisterResponse>(
+        let request = Request<ESignResponse>(
             method: .POST,
             endpoint: "/esign/register",
             body: requestBody,
@@ -98,6 +98,16 @@ class DefaultESignProvider: ESignServicesProvider {
         let request = Request<Void>(
             method: .GET,
             endpoint: "/esign/acceptConsent",
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+        
+        return try await client.send(request)
+    }
+    
+    func performResult(uuid: String) async throws -> ESignResponse {
+        let request = Request<ESignResponse>(
+            method: .GET,
+            endpoint: "/esign/result",
             baseRequest: BaseRequestImpl(uuid: uuid)
         )
         

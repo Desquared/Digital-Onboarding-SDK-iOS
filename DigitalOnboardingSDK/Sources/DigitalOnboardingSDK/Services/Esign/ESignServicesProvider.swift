@@ -62,5 +62,11 @@ public protocol ESignServicesProvider {
     /// - uuid: The UUID associated with the documents.
     func performDocumentRetrieve(uuid: String) async throws -> [DocumentResponse]
     
+    /// Accept the consent for eSign process for the given UUID.
+    /// Trigger only from explicit user action and record consent locally.
+    /// - Parameters:
+    /// - uuid: The UUID associated with the consent.
+    func acceptConsent(uuid: String) async throws -> Void
+    
 }
 

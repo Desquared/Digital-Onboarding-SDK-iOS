@@ -93,4 +93,14 @@ class DefaultESignProvider: ESignServicesProvider {
         
         return try await client.send(request)
     }
+    
+    func acceptConsent(uuid: String) async throws -> Void {
+        let request = Request<Void>(
+            method: .GET,
+            endpoint: "/esign/acceptConsent",
+            baseRequest: BaseRequestImpl(uuid: uuid)
+        )
+        
+        return try await client.send(request)
+    }
 }

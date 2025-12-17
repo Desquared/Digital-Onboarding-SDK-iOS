@@ -24,7 +24,7 @@ public struct UIConfig {
     public let radiusSmall: CGFloat
     
     /// Custom header provider (optional, uses default header if nil)
-    public let customHeader: (any DocumentUploadHeaderProtocol)
+    public let customHeader: (any SDKHeaderProtocol)
     
     /// Initialize UI configuration
     /// - Parameters:
@@ -38,7 +38,7 @@ public struct UIConfig {
         fontModel: FontModel,
         iconsModel: IconsModel,
         radiusSmall: CGFloat,
-        customHeader: (any DocumentUploadHeaderProtocol)
+        customHeader: (any SDKHeaderProtocol)
     ) {
         self.colorModel = colorModel
         self.fontModel = fontModel

@@ -9,7 +9,7 @@ import SwiftUI
 
 /// Protocol for custom document upload header views
 /// Host apps can implement this to provide their own header UI
-public protocol DocumentUploadHeaderProtocol {
+public protocol SDKHeaderProtocol {
     
     /// Create the header view with current state
     /// - Parameters:

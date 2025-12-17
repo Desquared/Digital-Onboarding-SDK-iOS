@@ -12,6 +12,9 @@ import SwiftUI
 public class DocumentUploadViewState: ObservableObject {
     
     @Published var title: String = "Upload Document"
+    @Published var stepTitle: String = "Step 1"
+    @Published var currentStep: Int = 1
+    @Published var totalSteps: Int = 1
     @Published var instructions: String = "Please capture a clear photo of your document"
     @Published var progress: Double = 0.0
     @Published var isLoading: Bool = false

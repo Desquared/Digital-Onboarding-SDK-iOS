@@ -18,17 +18,16 @@ struct DocumentUploadView: View {
         ZStack {
 //            ScrollView {
 //                VStack(spacing: 24) {
-//                    // Progress Bar
-//                    ProgressView(value: viewModel.progress)
-//                        .tint(Color(uiConfig.colorModel.primaryProductColor))
-//                        .padding(.horizontal)
-//                    
-//                    // Title
-//                    Text(viewModel.title)
-//                        .font(Font(uiConfig.titleFont))
-//                        .foregroundColor(Color(uiConfig.textColor))
-//                        .multilineTextAlignment(.center)
-//                        .padding(.horizontal)
+//                    // Custom or Default Header
+//                    if let customHeader = uiConfig.customHeader {
+//                        customHeader.makeHeader(
+//                            title: viewModel.title,
+//                            stepTitle: viewModel.stepTitle,
+//                            currentStep: viewModel.currentStep,
+//                            totalSteps: viewModel.totalSteps
+//                        )
+//                    }
+//                }
 //                    
 //                    // Instructions
 //                    Text(viewModel.instructions)

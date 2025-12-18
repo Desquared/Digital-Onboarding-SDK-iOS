@@ -27,6 +27,7 @@ public class DocumentUploadViewState: ObservableObject {
     @Published var showRetryButton: Bool = false
     @Published var showContinueButton: Bool = false
     @Published var showImagePicker: Bool = false
+    @Published var showDocumentScanner: Bool = false
     
     var onCaptureDocument: () -> Void = {}
     var onRetry: () -> Void = {}

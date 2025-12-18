@@ -11,7 +11,7 @@ import SwiftUI
 struct ExampleAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DocumentUploadExampleView()
         }
     }
 }

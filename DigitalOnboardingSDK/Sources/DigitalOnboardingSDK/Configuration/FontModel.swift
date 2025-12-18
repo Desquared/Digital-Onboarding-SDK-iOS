@@ -13,4 +13,11 @@ public struct FontModel {
     let subtitleM: Font
     let bodyMRegular: Font
     let buttonL: Font
+    
+    public init(subtitleLarge: Font, subtitleM: Font, bodyMRegular: Font, buttonL: Font) {
+        self.subtitleLarge = subtitleLarge
+        self.subtitleM = subtitleM
+        self.bodyMRegular = bodyMRegular
+        self.buttonL = buttonL
+    }
 }

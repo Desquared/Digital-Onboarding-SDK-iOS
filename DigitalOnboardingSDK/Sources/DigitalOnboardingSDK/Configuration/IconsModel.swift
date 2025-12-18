@@ -13,4 +13,12 @@ public struct IconsModel {
     let downloadButtonIcon: Image
     let successIcon: Image
     let fileIcon: Image
+    
+    public init (errorIcon: Image, failIcon: Image, downloadButtonIcon: Image, successIcon: Image, fileIcon: Image) {
+        self.errorIcon = errorIcon
+        self.failIcon = failIcon
+        self.downloadButtonIcon = downloadButtonIcon
+        self.successIcon = successIcon
+        self.fileIcon = fileIcon
+    }
 }

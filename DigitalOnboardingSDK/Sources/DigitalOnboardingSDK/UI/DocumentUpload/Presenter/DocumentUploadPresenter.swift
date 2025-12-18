@@ -62,21 +62,7 @@ public final class DocumentUploadPresenter: DocumentUploadPresenterProtocol {
     /// Called when document image is captured
     /// - Parameter image: The captured document image
     public func didCaptureDocument(_ image: UIImage) {
-        view?.showLoading(true)
-        
-        Task {
-            do {
-                let response = try await interactor.uploadDocument(
-                    image: image,
-                    documentType: entity.currentDocumentType,
-                    docId: entity.currentDocId
-                )
-                
-                await handleUploadResponse(response)
-            } catch {
-                await handleError(error)
-            }
-        }
+        view?.updatePlaceholderImage(image)
     }
     
     /// Called when user wants to retry capture
@@ -157,7 +143,7 @@ public final class DocumentUploadPresenter: DocumentUploadPresenterProtocol {
             // Check if this was front side and we need back side
             if entity.currentDocId.contains("front") {
                 entity.currentDocId = entity.currentDocId.replacingOccurrences(of: "front", with: "back")
-                view?.showDocumentCapture(for: entity.currentDocumentType)
+                view?.showDocumentScanner(for: entity.currentDocumentType)
             } else {
                 // All documents uploaded, ready to continue
                 view?.showSuccess("All documents uploaded successfully")

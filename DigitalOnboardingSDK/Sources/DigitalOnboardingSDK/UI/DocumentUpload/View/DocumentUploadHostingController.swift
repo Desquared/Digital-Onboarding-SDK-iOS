@@ -92,6 +92,19 @@ public final class DocumentUploadHostingController: UIViewController {
 
 extension DocumentUploadHostingController: DocumentUploadViewProtocol {
     
+    public func updatePlaceholderImage(_ image: UIImage) {
+        viewModel.capturedImage = image
+    }
+    
+    
+    public func showDocumentScanner(for documentType: DocumentType) {
+        viewModel.isLoading = false
+        viewModel.showCaptureButton = true
+        viewModel.showRetryButton = true
+        viewModel.showContinueButton = false
+    }
+    
+    
     /// Display loading state
     /// - Parameter isLoading: True to show loading, false to hide
     public func showLoading(_ isLoading: Bool) {
@@ -125,14 +138,15 @@ extension DocumentUploadHostingController: DocumentUploadViewProtocol {
     public func showSuccess(_ message: String) {
         viewModel.successMessage = message
         viewModel.showSuccess = true
-        viewModel.showCaptureButton = false
-        viewModel.showRetryButton = true
+        viewModel.showCaptureButton = true
+        viewModel.showRetryButton = false
         viewModel.showContinueButton = true
     }
     
     /// Navigate to next screen
     public func navigateToNext() {
         // Router will handle navigation
+        navigationController?.popViewController(animated: true)
     }
     
     /// Update progress indicator
@@ -140,6 +154,8 @@ extension DocumentUploadHostingController: DocumentUploadViewProtocol {
     ///   - current: Current step number
     ///   - total: Total number of steps
     public func updateProgress(current: Int, total: Int) {
+        viewModel.currentStep = current
+        viewModel.totalSteps = total
         viewModel.progress = Double(current) / Double(total)
     }
 }

@@ -48,11 +48,11 @@ public final class DocumentUploadInteractor: DocumentUploadInteractorProtocol {
         return try await divServicesProvider.performStoreDocument(
             uuid: uuid,
             encodedDocument: base64String,
-            entityType: "DOCUMENT",
+            entityType: "DOCUMENT", // awaiting for info
             mimeType: .imageJpeg,
             docId: docId,
             documentType: documentType,
-            errorCodes: nil
+            errorCodes: nil // awaiting for info
         )
     }
     

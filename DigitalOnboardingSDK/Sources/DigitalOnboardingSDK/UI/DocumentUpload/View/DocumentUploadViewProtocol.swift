@@ -5,6 +5,7 @@
 //  Created by Christos Magoulas on 17/12/25.
 //
 
+import UIKit
 
 /// Protocol for the Document Upload View
 /// Handles UI updates and user interactions
@@ -22,13 +23,15 @@ public protocol DocumentUploadViewProtocol: AnyObject {
     /// - Parameter step: The current step in the flow
     func updateStep(_ step: Step)
     
-    /// Show document capture interface
+    /// Show document scanner modal
     /// - Parameter documentType: The type of document to capture
-    func showDocumentCapture(for documentType: DocumentType)
+    func showDocumentScanner(for documentType: DocumentType)
     
     /// Show success message for uploaded document
     /// - Parameter message: Success message to display
     func showSuccess(_ message: String)
+    
+    func updatePlaceholderImage(_ image: UIImage)
     
     /// Navigate to next screen
     func navigateToNext()

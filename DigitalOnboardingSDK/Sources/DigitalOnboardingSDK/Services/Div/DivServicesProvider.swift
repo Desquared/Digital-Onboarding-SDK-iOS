@@ -14,27 +14,17 @@ public protocol DivServicesProvider {
     ///  - channel: The channel through which the registration is performed.
     ///  - orderId: The order identifier.
     ///  - flow: The flow type for the registration.
-    ///  - darkMode: A boolean indicating if dark mode is enabled.
-    ///  - redirectUrl: The URL to redirect to after registration.
-    ///  - fallbackUrl: An optional fallback URL in case of failure.
     ///  - lang: The language code for the registration process.
-    ///  - title: The title for the registration page.
     ///  - guid: An optional globally unique identifier for the user from CosmoteID.
     ///  - attributes: A list of attributes to be included in the registration.
-    ///  - steps: A list of steps involved in the registration process.
     ///  - metadata: A list of metadata items associated with the user.
     func performRegister(
         channel: String,
         orderId: String,
-        flow: String,
-        darkMode: Bool,
-        redirectUrl: String,
-        fallbackUrl: String?,
+        flow: FlowEnum,
         lang: String,
-        title: String,
         guid: String?,
         attributes: [Attribute],
-        steps: [Step],
         metadata: [Metadata]
     ) async throws -> DivRegisterResponse
 

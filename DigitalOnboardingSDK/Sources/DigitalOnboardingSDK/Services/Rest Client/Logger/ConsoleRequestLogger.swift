@@ -1,5 +1,5 @@
 //
-//  RequestLogger.swift
+//  ConsoleRequestLogger.swift
 //  DigitalOnboardingSDK
 //
 //  Created by Christos Magoulas on 11/12/25.

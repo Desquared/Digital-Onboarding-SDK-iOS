@@ -17,29 +17,19 @@ class DefaultDivServicesProvider: DivServicesProvider {
     func performRegister(
         channel: String,
         orderId: String,
-        flow: String,
-        darkMode: Bool,
-        redirectUrl: String,
-        fallbackUrl: String?,
+        flow: FlowEnum,
         lang: String,
-        title: String,
         guid: String?,
         attributes: [Attribute],
-        steps: [Step],
         metadata: [Metadata]
     ) async throws -> DivRegisterResponse {
         let requestBody = DivRegisterRequest(
             channel: channel,
             orderId: orderId,
-            flow: flow,
-            darkMode: darkMode,
-            redirectUrl: redirectUrl,
-            fallbackUrl: fallbackUrl,
+            flow: flow.rawValue,
             lang: lang,
-            title: title,
             guid: guid,
             attributes: attributes,
-            steps: steps,
             metadata: metadata
         )
         

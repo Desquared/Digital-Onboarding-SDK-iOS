@@ -67,7 +67,7 @@ public final class DigitalOnboardingSDK {
     public func startDIVFlow(
         channel: String,
         orderId: String,
-        flow: String,
+        flow: FlowEnum,
         darkMode: Bool,
         redirectUrl: String,
         fallbackUrl: String? = nil,
@@ -84,14 +84,9 @@ public final class DigitalOnboardingSDK {
             channel: channel,
             orderId: orderId,
             flow: flow,
-            darkMode: darkMode,
-            redirectUrl: redirectUrl,
-            fallbackUrl: fallbackUrl,
             lang: lang,
-            title: title,
             guid: guid,
             attributes: attributes,
-            steps: steps,
             metadata: metadata
         )
         

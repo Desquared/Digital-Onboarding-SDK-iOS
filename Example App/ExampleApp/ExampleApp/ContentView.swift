@@ -54,15 +54,10 @@ struct ContentView: View {
             let response = try await provider.performRegister(
                 channel: "OneApp",
                 orderId: "ORDER-\(UUID().uuidString)",
-                flow: "flow",
-                darkMode: false,
-                redirectUrl: "https://example.com/redirect",
-                fallbackUrl: nil,
+                flow: FlowEnum.youthPrepaidNew,
                 lang: "en",
-                title: "Example",
                 guid: "12345677868",
                 attributes: [],
-                steps: [],
                 metadata: []
             )
             await MainActor.run {

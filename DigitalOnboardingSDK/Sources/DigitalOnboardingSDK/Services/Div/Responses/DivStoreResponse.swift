@@ -9,8 +9,8 @@ import Foundation
 
 public struct DivStoreResponse: Decodable {
     
-    private let step: Step?
-    private let documents: [DocumentModel]?
+    let step: Step?
+    let documents: [DocumentModel]?
     
     private enum CodingKeys: String, CodingKey {
         case step, documents

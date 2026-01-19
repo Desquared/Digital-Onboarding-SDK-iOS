@@ -53,7 +53,7 @@ public protocol DivServicesProvider {
     /// Use to render progress UI and enable/disable actions by step.
     /// - Parameters:
     /// - uuid: The UUID obtained from the registration step.
-    func performValidate(uuid: String) async throws -> DivValidateResponse
+    func performValidate(uuid: String) async throws -> ValidateResponse
     
     /// Checks verification status of uploaded documents.
     /// Needs time for verification. Possible polling or websocket

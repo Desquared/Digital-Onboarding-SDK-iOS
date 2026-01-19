@@ -1,5 +1,5 @@
 //
-//  DivRestClient.swift
+//  DefaultDivServicesProvider.swift
 //  DigitalOnboardingSDK
 //
 //  Created by Christos Magoulas on 10/12/25.

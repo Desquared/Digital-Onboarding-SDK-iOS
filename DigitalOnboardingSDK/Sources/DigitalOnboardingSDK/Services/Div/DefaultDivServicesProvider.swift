@@ -1,5 +1,5 @@
 //
-//  DivRestClient.swift
+//  DefaultDivServicesProvider.swift
 //  DigitalOnboardingSDK
 //
 //  Created by Christos Magoulas on 10/12/25.
@@ -7,39 +7,29 @@
 
 import Foundation
 
-class DefaultDivServicesProvider: DivServicesProvider {
+public class DefaultDivServicesProvider: DivServicesProvider {
     private let client: RestApiClient
     
-    init(client: RestApiClient) {
+    public init(client: RestApiClient) {
         self.client = client
     }
     
-    func performRegister(
+    public func performRegister(
         channel: String,
         orderId: String,
-        flow: String,
-        darkMode: Bool,
-        redirectUrl: String,
-        fallbackUrl: String?,
+        flow: FlowEnum,
         lang: String,
-        title: String,
         guid: String?,
         attributes: [Attribute],
-        steps: [Step],
         metadata: [Metadata]
     ) async throws -> DivRegisterResponse {
-        let requestBody = RegisterRequest(
+        let requestBody = DivRegisterRequest(
             channel: channel,
             orderId: orderId,
-            flow: flow,
-            darkMode: darkMode,
-            redirectUrl: redirectUrl,
-            fallbackUrl: fallbackUrl,
+            flow: flow.rawValue,
             lang: lang,
-            title: title,
             guid: guid,
             attributes: attributes,
-            steps: steps,
             metadata: metadata
         )
         
@@ -53,7 +43,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performStoreDocument(
+    public func performStoreDocument(
         uuid: String,
         encodedDocument: String,
         entityType: String,
@@ -82,7 +72,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performValidate(uuid: String) async throws -> ValidateResponse {
+    public func performValidate(uuid: String) async throws -> ValidateResponse {
         let request = Request<ValidateResponse>(
             method: .GET,
             endpoint: "/validate",
@@ -93,7 +83,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performVerifyDocument(uuid: String) async throws -> DivVerifyDocumentResponse {
+    public func performVerifyDocument(uuid: String) async throws -> DivVerifyDocumentResponse {
         let request = Request<DivVerifyDocumentResponse>(
             method: .GET,
             endpoint: "/verifyDocument",
@@ -103,7 +93,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performStepReset(uuid: String) async throws -> DivVerifyDocumentResponse {
+    public func performStepReset(uuid: String) async throws -> DivVerifyDocumentResponse {
         let request = Request<DivVerifyDocumentResponse>(
             method: .GET,
             endpoint: "/documentStep/reset",
@@ -113,7 +103,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performDocumentStepRetrieve(uuid: String) async throws -> DivVerifyDocumentResponse {
+    public func performDocumentStepRetrieve(uuid: String) async throws -> DivVerifyDocumentResponse {
         let request = Request<DivVerifyDocumentResponse>(
             method: .GET,
             endpoint: "/documentStep/retrieve",
@@ -123,7 +113,7 @@ class DefaultDivServicesProvider: DivServicesProvider {
         return try await client.send(request)
     }
     
-    func performResult(uuid: String) async throws -> DivResultResponse {
+    public func performResult(uuid: String) async throws -> DivResultResponse {
         let request = Request<DivResultResponse>(
             method: .GET,
             endpoint: "/v1/result",

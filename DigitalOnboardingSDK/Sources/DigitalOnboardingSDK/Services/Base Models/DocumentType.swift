@@ -10,4 +10,5 @@ public enum DocumentType: String, Codable {
     case greekIdFront = "GREEK_ID_FRONT"
     case greekIdBack = "GREEK_ID_BACK"
     case selfie = "SELFIE"
+    case unknown = "UNKNOWN"
 }

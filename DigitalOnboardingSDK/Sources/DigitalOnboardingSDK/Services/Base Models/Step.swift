@@ -6,10 +6,16 @@
 //
 
 public struct Step: Codable {
-    private let title: String
-    private let active: Bool
-    private let order: Int
+    
+    public let title: String
+    public let active: Bool
+    public let order: Int
 
+    /// Initialize a step
+    /// - Parameters:
+    ///   - title: The title of the step
+    ///   - active: Whether the step is currently active
+    ///   - order: The order/position of the step
     public init(title: String, active: Bool, order: Int) {
         self.title = title
         self.active = active

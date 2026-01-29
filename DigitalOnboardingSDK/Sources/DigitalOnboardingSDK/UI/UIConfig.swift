@@ -16,7 +16,7 @@ public struct UIConfig {
     public init (
         buttonsConfig: ButtonsConfig,
         labelsConfig: LabelsConfig,
-        screenColors: ScreenColorsConfig,
+        screenColorsConfig: ScreenColorsConfig,
         genericRadius: CGFloat
     ) {
         self.buttonsConfig = buttonsConfig

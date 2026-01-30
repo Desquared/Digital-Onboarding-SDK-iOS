@@ -7,7 +7,7 @@ public final class DigitalOnboardingSDK {
     init(
         servicesProvider: ServicesProvider,
         uiConfig: UIConfig,
-        environment: EnvironmentType = .production
+        environment: EnvironmentType = .uat
     ) {
         self.servicesProvider = servicesProvider
         self.uiConfig = uiConfig

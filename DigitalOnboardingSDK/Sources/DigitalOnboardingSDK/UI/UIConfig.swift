@@ -9,19 +9,19 @@ import UIKit
 
 public struct UIConfig {
     let buttonsConfig: ButtonsConfig
-    let labelsConfig: LabelsConfig
-    let screenColorsConfig: ScreenColorsConfig
-    let genericRadius: CGFloat
+    let typographyConfig: TypographyConfig
+    let colorsConfig: ColorsConfig
+    let cornerRadiusConfig: CornerRadiusConfig
     
-    public init (
+    public init(
         buttonsConfig: ButtonsConfig,
-        labelsConfig: LabelsConfig,
-        screenColorsConfig: ScreenColorsConfig,
-        genericRadius: CGFloat
+        typographyConfig: TypographyConfig,
+        colorsConfig: ColorsConfig,
+        cornerRadiusConfig: CornerRadiusConfig
     ) {
         self.buttonsConfig = buttonsConfig
-        self.labelsConfig = labelsConfig
-        self.screenColorsConfig = screenColors
-        self.genericRadius = genericRadius
+        self.typographyConfig = typographyConfig
+        self.colorsConfig = colorsConfig
+        self.cornerRadiusConfig = cornerRadiusConfig
     }
 }

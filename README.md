@@ -1,24 +1,34 @@
-# Digital-Onboarding-SDK-iOS
+# DIVEsignSDK
 
-SDK provides identity verification and e-sign document flows for iOS apps. It integrates with backend services to:
+iOS Swift Package for DIVEsign document capture SDK.
 
-- Capture and upload identity artifacts to DM (Document Management)
-- Run DIV typedetect and verify workflows asynchronously
-- Display and accept documents for digital signature via CMP through an e-sign BFF
-- Return structured results to the host app
+## Installation
 
-## Features
+In Xcode: **File → Add Package Dependencies**
 
-- Document capture and upload to DM with minimal client-side persistence
-- Asynchronous typedetect and verify with polling and timeouts
-- Selfie capture and verification step
-- E-sign document preview and acceptance
-- Pluggable ServiceProvider for network stack
-- Dynamic UI configuration per host product
-- Observability headers and correlation IDs throughout requests
+Enter: `https://github.com/Desquared/Digital-Onboarding-SDK-iOS.git`
 
-## Requirements
+## Usage
 
-- iOS 16.0+
-- Xcode 15+
-- Swift 5.9+
+```swift
+import SwiftUI
+import DIVEsignSDK
+
+@main
+struct MyApp: App {
+    init() {
+        // Initialize Koin dependency injection
+        Common_iosKt.startKoinLib()
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+## Current Version
+
+**0.0.3**

@@ -2,21 +2,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "DigitalOnboardingSDK",
+    name: "DIVEsignSDK",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v15)
     ],
     products: [
         .library(
-            name: "DigitalOnboardingSDK",
-            targets: ["DigitalOnboardingSDK"]
-        )
+            name: "DIVEsignSDK",
+            targets: ["DIVEsignSDK"]
+        ),
     ],
     targets: [
         .binaryTarget(
-            name: "DigitalOnboardingSDK",
-            url: "https://github.com/Desquared/Digital-Onboarding-SDK-iOS/releases/download/v0.0.3/DigitalOnboardingSDK-iOS-0.0.3.xcframework.zip",
-            checksum: "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+            name: "DIVEsignSDK",
+            url: "https://github.com/Desquared/Digital-Onboarding-SDK-iOS/releases/download/0.0.5/DIVEsignSDK.xcframework.zip",
+            checksum: "48b5971de7fe525d6f3f0a6df51749cb10806ba658e48fd2507c91cf8d44a0ca"
         )
     ]
 )

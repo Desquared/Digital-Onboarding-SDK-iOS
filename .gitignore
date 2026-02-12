@@ -1,5 +1,3 @@
-# Ignore local XCFramework - binary is hosted on GitHub Releases
-DIVEsignSDK.xcframework/
 .DS_Store
 *.xcuserstate
 xcuserdata/

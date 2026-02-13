@@ -1,13 +1,18 @@
-# DIVEsignSDK
+# Digital Onboarding SDK for iOS
 
-iOS Swift Package for DIVEsign document capture SDK.
+![Latest Version](https://img.shields.io/github/v/tag/Desquared/Digital-Onboarding-SDK-iOS?label=Latest%20Version)
+![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen)
+
+Swift Package for integrating the DIVEsign document capture SDK into iOS applications.
 
 ## Installation
 
-In Xcode: **File → Add Package Dependencies**
+In Xcode:
 
-Enter: `https://github.com/Desquared/Digital-Onboarding-SDK-iOS.git`
+**File → Add Package Dependencies**
 
-## Current Version
+Use the repository URL:
 
-**0.0.11**
+https://github.com/Desquared/Digital-Onboarding-SDK-iOS.git
+
+Select the desired version and add the package to your target.

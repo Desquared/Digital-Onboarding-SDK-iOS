@@ -15,8 +15,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "DIVEsignSDK",
-            url: "https://github.com/Desquared/Digital-Onboarding-SDK-iOS/releases/download/0.0.61/DIVEsignSDK-0.0.61.xcframework.zip",
-            checksum: "b00414ff42c12181a13d4e9968af5f8c7415ff073dfd8bdcdcdc73a87638e0b5"
+            url: "https://github.com/Desquared/Digital-Onboarding-SDK-iOS/releases/download/0.0.62/DIVEsignSDK-0.0.62.xcframework.zip",
+            checksum: "80e2259fda96f07e36206095e50e16b7d1d16a52776784722dcad30099cf850d"
         )
     ]
 )

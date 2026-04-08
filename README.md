@@ -10,4 +10,4 @@ Enter: `https://github.com/Desquared/Digital-Onboarding-SDK-iOS.git`
 
 ## Current Version
 
-**0.1.11**
+**0.0.81**
